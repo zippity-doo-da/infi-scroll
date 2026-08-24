@@ -1,0 +1,141 @@
+import type { WorldTemplate } from '../../../engine/contracts/world';
+
+const GROUND_Y = 610;
+const OBJECT_BASE_Y = GROUND_Y + 8;
+
+export const fantasyCity: WorldTemplate = {
+  id: 'fantasy-city',
+  name: 'Fantasy City',
+  version: 2,
+  designProfile: 'silhouette-screensaver',
+  layout: { id: 'walled-city', tags: ['urban', 'walled', 'road'], groundY: GROUND_Y, chunkHeight: 720 },
+  camera: { autoScrollSpeed: 32, inputSpeed: 340 },
+  themes: ['general-fantasy', 'night'],
+  assetPacks: ['fantasy-city-unified-v1'],
+  palette: { sky: 0x25152f, ground: 0x211726, highlight: 0xf0a744 },
+  backgrounds: [
+    { id: 'night-sky', asset: 'city-sky', depth: -120, parallax: 0.015, y: 396.5, spacing: 1981, scale: { min: 1, max: 1 } },
+    { id: 'distant-city', asset: 'city-skyline', depth: -100, parallax: 0.07, y: 330, spacing: 1981, scale: { min: 1, max: 1 } },
+    { id: 'middle-city', asset: 'city-midground', depth: -80, parallax: 0.14, y: 461.5, spacing: 1981, scale: { min: 1, max: 1 } },
+    { id: 'continuous-street', asset: 'city-ground', depth: 0, parallax: 1, y: 750, spacing: 1981, scale: { min: 1, max: 1 } },
+  ],
+  entities: [
+    { id: 'guildhouse-art', asset: 'guildhouse-art', depth: 6, scale: 0.75, anchor: { x: 0.5, y: 1 } },
+    { id: 'townhouse-art', asset: 'townhouse-art', depth: 7, scale: 0.74, anchor: { x: 0.5, y: 1 } },
+    { id: 'gatehouse-art', asset: 'gatehouse-art', depth: 7, scale: 0.58, anchor: { x: 0.5, y: 1 } },
+    { id: 'apothecary-art', asset: 'apothecary-art', depth: 7, scale: 0.69, anchor: { x: 0.5, y: 1 } },
+    { id: 'bakery-art', asset: 'bakery-art', depth: 7, scale: 0.65, anchor: { x: 0.5, y: 1 } },
+    { id: 'workshop-art', asset: 'workshop-art', depth: 7, scale: 0.85, anchor: { x: 0.5, y: 1 } },
+    { id: 'celestial-temple-art', asset: 'celestial-temple-art', depth: 7, scale: 0.58, anchor: { x: 0.5, y: 1 } },
+    { id: 'civic-archive-art', asset: 'civic-archive-art', depth: 7, scale: 0.65, anchor: { x: 0.5, y: 1 } },
+    { id: 'merchant-house-art', asset: 'merchant-house-art', depth: 7, scale: 0.62, anchor: { x: 0.5, y: 1 } },
+    { id: 'market-stall-art', asset: 'market-stall-art', depth: 10, scale: 0.4, anchor: { x: 0.5, y: 1 } },
+    { id: 'tree-cluster-art', asset: 'tree-cluster-art', depth: 5, scale: 0.64, anchor: { x: 0.5, y: 1 } },
+    { id: 'bridge-art', asset: 'bridge-art', depth: 9, scale: 0.82, anchor: { x: 0.5, y: 1 } },
+    { id: 'townsperson-1', asset: 'townsperson-1', depth: 14, scale: 0.55, anchor: { x: 0.5, y: 1 }, components: { tags: ['inhabitant', 'grounded', 'stationary'] } },
+    { id: 'townsperson-2', asset: 'townsperson-2', depth: 14, scale: 0.55, anchor: { x: 0.5, y: 1 }, components: { tags: ['inhabitant', 'grounded', 'stationary'] } },
+    { id: 'townsperson-3', asset: 'townsperson-3', depth: 14, scale: 0.55, anchor: { x: 0.5, y: 1 }, components: { tags: ['inhabitant', 'grounded', 'stationary'] } },
+    { id: 'townsperson-4', asset: 'townsperson-4', depth: 14, scale: 0.55, anchor: { x: 0.5, y: 1 }, components: { tags: ['inhabitant', 'grounded', 'stationary'] } },
+    { id: 'far-wagon-right', asset: 'wagon-rolling', animation: 'wagon-roll-right', depth: 30, scale: 0.68, anchor: { x: 0.5, y: 1 }, components: { pathFollower: { path: 'far-street', speed: { min: 34, max: 46 }, direction: 1 }, tags: ['traffic', 'grounded', 'far-lane'] } },
+    { id: 'far-wagon-left', asset: 'wagon-rolling', animation: 'wagon-roll-left', depth: 30, scale: 0.68, anchor: { x: 0.5, y: 1 }, components: { pathFollower: { path: 'far-street', speed: { min: 34, max: 46 }, direction: -1 }, tags: ['traffic', 'grounded', 'far-lane'] } },
+    { id: 'near-wagon-right', asset: 'wagon-rolling', animation: 'wagon-roll-right', depth: 40, scale: 0.82, anchor: { x: 0.5, y: 1 }, components: { pathFollower: { path: 'near-street', speed: { min: 42, max: 56 }, direction: 1 }, tags: ['traffic', 'grounded', 'near-lane'] } },
+    { id: 'near-wagon-left', asset: 'wagon-rolling', animation: 'wagon-roll-left', depth: 40, scale: 0.82, anchor: { x: 0.5, y: 1 }, components: { pathFollower: { path: 'near-street', speed: { min: 42, max: 56 }, direction: -1 }, tags: ['traffic', 'grounded', 'near-lane'] } },
+    { id: 'bat', asset: 'city-bat', animation: 'bat-fly', depth: -20, scale: 0.62, anchor: { x: 0.5, y: 0.5 }, components: { pathFollower: { path: 'sky-route', speed: { min: 38, max: 56 } }, tags: ['traffic', 'airborne', 'nocturnal'] } },
+    { id: 'flying-carpet', asset: 'flying-carpet-rider', depth: -15, scale: 0.8, anchor: { x: 0.5, y: 0.5 }, components: { pathFollower: { path: 'carpet-route', speed: { min: 95, max: 115 }, direction: 1 }, tags: ['traffic', 'airborne', 'occupied', 'carpet-route'] } },
+  ],
+  animations: [
+    { id: 'wagon-roll-right', asset: 'wagon-rolling', frames: [11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0], frameRate: 6, repeat: -1 },
+    { id: 'wagon-roll-left', asset: 'wagon-rolling', frames: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], frameRate: 6, repeat: -1 },
+    { id: 'bat-fly', asset: 'city-bat', frames: [0, 1, 2, 1], frameRate: 6, repeat: -1 },
+  ],
+  chunks: [
+    {
+      id: 'city-gate', width: 476, tags: ['gate', 'landmark'],
+      objects: [{ entity: 'gatehouse-art', x: 238, y: OBJECT_BASE_Y }],
+    },
+    {
+      id: 'workshop-row', width: 789, tags: ['crafts'],
+      objects: [{ entity: 'workshop-art', x: 394.5, y: OBJECT_BASE_Y }],
+      spawns: [{ entity: 'townsperson-4', count: { min: 1, max: 1 }, area: { x: { min: 620, max: 680 }, y: { min: OBJECT_BASE_Y, max: OBJECT_BASE_Y } } }],
+    },
+    {
+      id: 'bakery-row', width: 609, tags: ['market', 'commercial'],
+      objects: [
+        { entity: 'bakery-art', x: 304.5, y: OBJECT_BASE_Y },
+        { entity: 'market-stall-art', x: 485, y: OBJECT_BASE_Y },
+      ],
+      spawns: [{ entity: 'townsperson-1', count: { min: 1, max: 1 }, area: { x: { min: 90, max: 140 }, y: { min: OBJECT_BASE_Y, max: OBJECT_BASE_Y } } }],
+    },
+    {
+      id: 'merchant-row', width: 529, tags: ['market', 'commercial'],
+      objects: [{ entity: 'merchant-house-art', x: 264.5, y: OBJECT_BASE_Y }],
+      spawns: [{ entity: 'townsperson-2', count: { min: 1, max: 1 }, area: { x: { min: 410, max: 465 }, y: { min: OBJECT_BASE_Y, max: OBJECT_BASE_Y } } }],
+    },
+    {
+      id: 'apothecary-lane', width: 266, tags: ['commercial'],
+      objects: [{ entity: 'apothecary-art', x: 133, y: OBJECT_BASE_Y }],
+    },
+    {
+      id: 'guild-row', width: 594, tags: ['guild', 'civic'],
+      objects: [{ entity: 'guildhouse-art', x: 297, y: OBJECT_BASE_Y }],
+      spawns: [{ entity: 'townsperson-3', count: { min: 1, max: 1 }, area: { x: { min: 455, max: 510 }, y: { min: OBJECT_BASE_Y, max: OBJECT_BASE_Y } } }],
+    },
+    {
+      id: 'temple-district', width: 546, tags: ['temple'],
+      objects: [{ entity: 'celestial-temple-art', x: 273, y: OBJECT_BASE_Y }],
+    },
+    {
+      id: 'townhouse-lane', width: 233, tags: ['residential'],
+      objects: [{ entity: 'townhouse-art', x: 116.5, y: OBJECT_BASE_Y }],
+      spawns: [{ entity: 'townsperson-2', count: { min: 1, max: 1 }, area: { x: { min: 145, max: 190 }, y: { min: OBJECT_BASE_Y, max: OBJECT_BASE_Y } } }],
+    },
+    {
+      id: 'civic-archive', width: 560, tags: ['civic'],
+      objects: [{ entity: 'civic-archive-art', x: 280, y: OBJECT_BASE_Y }],
+    },
+    {
+      id: 'river-bridge', width: 664, tags: ['bridge', 'river'],
+      objects: [{ entity: 'bridge-art', x: 332, y: OBJECT_BASE_Y }],
+      spawns: [{ entity: 'townsperson-1', count: { min: 1, max: 1 }, area: { x: { min: 500, max: 560 }, y: { min: OBJECT_BASE_Y, max: OBJECT_BASE_Y } } }],
+    },
+  ],
+  chunkPlan: {
+    mode: 'authored',
+    sequence: ['city-gate', 'workshop-row', 'bakery-row', 'merchant-row', 'apothecary-lane', 'guild-row', 'temple-district', 'townhouse-lane', 'civic-archive', 'river-bridge'],
+    repeat: true,
+  },
+  paths: [
+    { id: 'far-street', y: 665, xPadding: 150 },
+    { id: 'near-street', y: 715, xPadding: 170 },
+    { id: 'sky-route', y: 180, xPadding: 0 },
+    { id: 'carpet-route', y: 290, xPadding: 180 },
+  ],
+  traffic: [
+    { id: 'far-street-vehicles', path: 'far-street', entities: ['far-wagon-right'], intervalMs: { min: 11000, max: 16000 }, maxActive: 1, maxActivePerDirection: 1 },
+    { id: 'near-street-vehicles', path: 'near-street', entities: ['near-wagon-left'], intervalMs: { min: 9000, max: 14000 }, maxActive: 1, maxActivePerDirection: 1 },
+    { id: 'bats', path: 'sky-route', entities: ['bat'], intervalMs: { min: 10000, max: 16000 }, maxActive: 1, maxActivePerDirection: 1 },
+    { id: 'flying-carpets', path: 'carpet-route', entities: ['flying-carpet'], intervalMs: { min: 16000, max: 24000 }, maxActive: 1, maxActivePerDirection: 1 },
+  ],
+  clock: { startHour: 20, realSecondsPerWorldHour: 30, loopHours: 24 },
+  environments: [{ id: 'night', sky: [0x25152f, 0x4b2948], ambientTint: 0xffffff }],
+  initialEnvironment: 'night',
+  weather: [{ id: 'clear' }],
+  initialWeather: 'clear',
+  events: [],
+  triggers: [{ id: 'gate-welcome', when: { type: 'camera-enters-chunk', chunk: 'city-gate' }, once: true, actions: [{ type: 'emit', event: 'entered-city' }] }],
+  audio: { ambience: 'city-evening', music: 'city-theme' },
+  pools: [
+    { id: 'bat-pool', entity: 'bat', initialSize: 1, maxSize: 1 },
+    { id: 'flying-carpet-pool', entity: 'flying-carpet', initialSize: 1, maxSize: 1 },
+    { id: 'far-wagon-right-pool', entity: 'far-wagon-right', initialSize: 1, maxSize: 1 },
+    { id: 'far-wagon-left-pool', entity: 'far-wagon-left', initialSize: 1, maxSize: 1 },
+    { id: 'near-wagon-right-pool', entity: 'near-wagon-right', initialSize: 1, maxSize: 1 },
+    { id: 'near-wagon-left-pool', entity: 'near-wagon-left', initialSize: 1, maxSize: 1 },
+  ],
+  offscreen: { sleepMargin: 240, suspendAnimation: true, suspendParticles: true, keepLogicalTime: true },
+  performanceBudget: {
+    targetFps: 60, maxDrawCalls: 250, maxTriangles: 12000, maxTextureMemoryMb: 384, maxActiveEntities: 250,
+    targetResolutions: [[1920, 1080], [2560, 1440], [3840, 2160]],
+  },
+  metadata: { description: 'A self-contained authored fantasy city using the unified panorama-referenced asset pack.', styleGuide: '/assets/fantasy-city/unified-v1/master-panorama-style-guide.png' },
+};

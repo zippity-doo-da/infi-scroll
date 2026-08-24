@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://infi-scroll.dev/schemas/world-pack.schema.json",
+  "title": "Infinite Scroll Asset Pack",
+  "type": "object",
+  "required": ["schemaVersion", "id", "version", "style", "assets", "recipes"],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "id": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+    "version": { "type": "integer", "minimum": 1 },
+    "sourceRoot": { "type": "string", "default": "assets" },
+    "requires": { "type": "array", "items": { "type": "string" } },
+    "compatibility": {
+      "type": "object",
+      "properties": {
+        "provides": { "type": "array", "items": { "type": "string" } },
+        "excludes": { "type": "array", "items": { "type": "string" } }
+      },
+      "required": ["provides"]
+    },
+    "style": {
+      "type": "object",
+      "required": ["guide", "palette", "outline", "detail", "groundAnchor"],
+      "properties": {
+        "guide": { "type": "string" },
+        "palette": { "type": "object", "maxProperties": 8, "additionalProperties": { "type": "integer" } },
+        "outline": {
+          "type": "object",
+          "required": ["color", "relativeWeight"],
+          "properties": {
+            "color": { "type": "integer" },
+            "relativeWeight": { "type": "number", "minimum": 0.004, "maximum": 0.018 }
+          }
+        },
+        "detail": { "enum": ["silhouette", "low", "medium", "high"] },
+        "groundAnchor": { "const": "bottom-center" }
+      }
+    },
+    "assets": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "file", "role"],
+        "properties": {
+          "id": { "type": "string" },
+          "file": { "type": "string" },
+          "output": { "type": "string" },
+          "role": { "type": "string" },
+          "opaque": { "type": "boolean" },
+          "prepare": {
+            "type": "object",
+            "properties": {
+              "trim": { "type": "boolean" },
+              "width": { "type": "integer", "minimum": 1 },
+              "height": { "type": "integer", "minimum": 1 },
+              "maxSize": { "type": "integer", "minimum": 1 },
+              "crop": { "type": "array", "items": { "type": "integer" }, "minItems": 4, "maxItems": 4 },
+              "cleanEdge": { "type": "integer", "minimum": 0 },
+              "seamWidth": { "type": "integer", "minimum": 0 },
+              "frames": { "type": "integer", "minimum": 1 },
+              "cellWidth": { "type": "integer", "minimum": 1 },
+              "cellHeight": { "type": "integer", "minimum": 1 }
+            }
+          }
+        }
+      }
+    },
+    "recipes": { "type": "array", "items": { "type": "object", "required": ["id", "asset", "role", "anchor"] } }
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "$schema": "../../schemas/world-pack.schema.json",
+  "schemaVersion": 1,
+  "id": "__WORLD_ID__-pack",
+  "version": 1,
+  "sourceRoot": "assets",
+  "compatibility": { "provides": ["urban", "night", "silhouette"] },
+  "style": {
+    "guide": "style-guide.png",
+    "palette": { "sky": 855856, "shadow": 1704027, "mid": 2758732, "warm": 7163197, "amber": 16754219 },
+    "outline": { "color": 592148, "relativeWeight": 0.012 },
+    "detail": "medium",
+    "groundAnchor": "bottom-center"
+  },
+  "assets": [
+    { "id": "__WORLD_ID__-sky", "file": "sky.png", "role": "sky", "opaque": true, "prepare": { "seamWidth": 64 } },
+    { "id": "__WORLD_ID__-city", "file": "city.png", "role": "mid-background", "prepare": { "trim": true, "seamWidth": 64 } },
+    { "id": "__WORLD_ID__-street", "file": "street.png", "role": "street", "opaque": true, "prepare": { "seamWidth": 48 } },
+    { "id": "__WORLD_ID__-building-01", "file": "building-01.png", "role": "architecture", "prepare": { "trim": true, "height": 420, "cleanEdge": 1 } },
+    { "id": "__WORLD_ID__-building-02", "file": "building-02.png", "role": "architecture", "prepare": { "trim": true, "height": 420, "cleanEdge": 1 } },
+    { "id": "__WORLD_ID__-building-03", "file": "building-03.png", "role": "architecture", "prepare": { "trim": true, "height": 420, "cleanEdge": 1 } },
+    { "id": "__WORLD_ID__-building-04", "file": "building-04.png", "role": "architecture", "prepare": { "trim": true, "height": 420, "cleanEdge": 1 } },
+    { "id": "__WORLD_ID__-building-05", "file": "building-05.png", "role": "architecture", "prepare": { "trim": true, "height": 420, "cleanEdge": 1 } },
+    { "id": "__WORLD_ID__-building-06", "file": "building-06.png", "role": "architecture", "prepare": { "trim": true, "height": 420, "cleanEdge": 1 } },
+    { "id": "__WORLD_ID__-building-07", "file": "building-07.png", "role": "architecture", "prepare": { "trim": true, "height": 420, "cleanEdge": 1 } },
+    { "id": "__WORLD_ID__-building-08", "file": "building-08.png", "role": "architecture", "prepare": { "trim": true, "height": 420, "cleanEdge": 1 } },
+    { "id": "__WORLD_ID__-person", "file": "person.png", "role": "inhabitant", "prepare": { "trim": true, "height": 100, "cleanEdge": 1 } },
+    { "id": "__WORLD_ID__-vehicle", "file": "vehicle-strip.png", "role": "vehicle", "prepare": { "trim": true, "frames": 6, "cellWidth": 256, "cellHeight": 256 } }
+  ],
+  "recipes": [
+    { "id": "building-01", "asset": "__WORLD_ID__-building-01", "role": "building", "anchor": { "x": 0.5, "y": 1 }, "tags": ["architecture", "grounded"] },
+    { "id": "building-02", "asset": "__WORLD_ID__-building-02", "role": "building", "anchor": { "x": 0.5, "y": 1 }, "tags": ["architecture", "grounded"] },
+    { "id": "building-03", "asset": "__WORLD_ID__-building-03", "role": "building", "anchor": { "x": 0.5, "y": 1 }, "tags": ["architecture", "grounded"] },
+    { "id": "building-04", "asset": "__WORLD_ID__-building-04", "role": "building", "anchor": { "x": 0.5, "y": 1 }, "tags": ["architecture", "grounded"] },
+    { "id": "building-05", "asset": "__WORLD_ID__-building-05", "role": "building", "anchor": { "x": 0.5, "y": 1 }, "tags": ["architecture", "grounded"] },
+    { "id": "building-06", "asset": "__WORLD_ID__-building-06", "role": "building", "anchor": { "x": 0.5, "y": 1 }, "tags": ["architecture", "grounded"] },
+    { "id": "building-07", "asset": "__WORLD_ID__-building-07", "role": "building", "anchor": { "x": 0.5, "y": 1 }, "tags": ["architecture", "grounded"] },
+    { "id": "building-08", "asset": "__WORLD_ID__-building-08", "role": "building", "anchor": { "x": 0.5, "y": 1 }, "tags": ["architecture", "grounded"] },
+    { "id": "person", "asset": "__WORLD_ID__-person", "role": "inhabitant", "anchor": { "x": 0.5, "y": 1 }, "worldHeight": 100, "tags": ["grounded", "stationary"] },
+    { "id": "vehicle", "asset": "__WORLD_ID__-vehicle", "role": "traffic", "anchor": { "x": 0.5, "y": 1 }, "animation": "vehicle-left", "directions": ["left", "right"], "tags": ["grounded", "street"] }
+  ]
+}

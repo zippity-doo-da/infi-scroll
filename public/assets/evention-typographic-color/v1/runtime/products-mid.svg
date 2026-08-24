@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080">
+  <style>
+    text { font-family: Inter, Arial, Helvetica, sans-serif; font-weight: 750; letter-spacing: 7px; fill: #001451; stroke: #54E577; stroke-width: 2.5px; paint-order: stroke fill; opacity: .38; }
+    .mono { font-family: "DM Mono", "Courier New", monospace; font-weight: 500; letter-spacing: 5px; fill: #54E577; stroke: none; opacity: .32; }
+  </style>
+  <text x="105" y="400" font-size="84">TIPS+GRATUITIES</text>
+  <text x="780" y="850" font-size="94">TOTAL RECON</text>
+  <text class="mono" x="112" y="450" font-size="20">ACCURATE / AUTOMATED / AUDITABLE</text>
+  <text class="mono" x="787" y="900" font-size="20">THE FINANCIAL TRUST LAYER</text>
+</svg>

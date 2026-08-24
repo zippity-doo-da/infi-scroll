@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080">
+  <style>
+    text { font-family: Inter,Arial,Helvetica,sans-serif; fill: none; stroke: #54E577; opacity: .13; }
+    .display { font-weight: 750; letter-spacing: 12px; stroke-width: 1.5px; }
+    .mono { font-family: "DM Mono","Courier New",monospace; fill: #54E577; stroke: none; letter-spacing: 6px; opacity: .14; }
+  </style>
+  <text class="display" x="90" y="180" font-size="70">TRUST AFTER CHECKOUT</text>
+  <text class="display" x="540" y="800" font-size="82">THE FINANCIAL TRUST LAYER</text>
+  <text class="mono" x="1140" y="235" font-size="18">CHECKOUT CONFIRMS PAYMENT</text>
+  <text class="mono" x="1260" y="270" font-size="18">EVENTION CONFIRMS TRUTH</text>
+</svg>

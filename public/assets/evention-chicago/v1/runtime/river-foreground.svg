@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1672" height="220" viewBox="0 0 1672 220">
+  <rect width="1672" height="150" fill="#062653"/>
+  <g fill="none" stroke-linecap="round" opacity=".52">
+    <path d="M30 22h105m48 0h66m100 0h128m42 0h91m120 0h146m68 0h92m106 0h160m61 0h89" stroke="#e0aa58" stroke-width="4"/>
+    <path d="M77 52h82m43 0h133m72 0h81m106 0h152m73 0h118m76 0h103m103 0h162" stroke="#54e577" stroke-width="3" opacity=".38"/>
+    <path d="M16 86h159m72 0h74m97 0h176m65 0h106m93 0h139m82 0h80m93 0h189" stroke="#829ac2" stroke-width="3" opacity=".38"/>
+    <path d="M110 120h129m76 0h142m101 0h89m119 0h183m73 0h121m96 0h172" stroke="#e0aa58" stroke-width="3" opacity=".35"/>
+  </g>
+  <rect y="146" width="1672" height="14" fill="#172239"/>
+  <rect y="160" width="1672" height="10" fill="#8f8c84"/>
+  <g fill="#182337" stroke="#080f1e" stroke-width="4">
+    <path d="M0 178h1672v42H0z"/>
+    <path d="M0 170h1672v13H0z"/>
+  </g>
+  <g stroke="#101a2d" stroke-width="7">
+    <path d="M0 174v46M140 174v46M280 174v46M420 174v46M560 174v46M700 174v46M840 174v46M980 174v46M1120 174v46M1260 174v46M1400 174v46M1540 174v46M1672 174v46"/>
+  </g>
+</svg>

@@ -1,0 +1,41 @@
+import { assetPackRegistry, designProfileRegistry, worldRegistry } from '../engine/core/Registry';
+import { silhouetteScreensaver } from './designProfiles/silhouetteScreensaver';
+import { illustratedCinematic } from './designProfiles/illustratedCinematic';
+import { typographicScreensaver } from './designProfiles/typographicScreensaver';
+import { fantasyCityPack } from './packs/fantasyCity';
+import { fantasyCityUnifiedV1Pack } from './packs/fantasyCityUnifiedV1';
+import { fantasyCorePack } from './packs/fantasyCore';
+import { sharedNaturePack } from './packs/sharedNature';
+import { coruscantV1Pack } from './packs/coruscantV1';
+import { verticalElementV1Pack } from './packs/verticalElementV1';
+import { silhouetteFantasyCityV1Pack } from './packs/silhouetteFantasyCityV1';
+import { eventionTypographicV1Pack } from './packs/eventionTypographicV1';
+import { eventionTypographicColorV1Pack } from './packs/eventionTypographicColorV1';
+import { eventionChicagoV1Pack } from './packs/eventionChicagoV1';
+import { eventionWackerV1Pack } from './packs/eventionWackerV1';
+import { runtimeVerificationPack } from './packs/runtimeVerification';
+import { fantasyCity } from './worlds/fantasy-city';
+import { coruscantCity } from './worlds/coruscant-city';
+import { fifthElementCity } from './worlds/fifth-element-city';
+import { silhouetteFantasyCity } from './worlds/silhouette-fantasy-city';
+import { eventionTypographic } from './worlds/evention-typographic';
+import { eventionTypographicColor } from './worlds/evention-typographic-color';
+import { eventionChicago } from './worlds/evention-chicago';
+import { eventionWacker } from './worlds/evention-wacker';
+import { runtimeVerification } from './worlds/runtime-verification';
+import { generatedPacks, generatedWorlds } from './generated';
+
+export function registerContent(): void {
+  [silhouetteScreensaver, illustratedCinematic, typographicScreensaver].forEach((profile) => designProfileRegistry.register(profile));
+  [sharedNaturePack, fantasyCorePack, fantasyCityPack, fantasyCityUnifiedV1Pack, coruscantV1Pack, verticalElementV1Pack, silhouetteFantasyCityV1Pack, eventionTypographicV1Pack, eventionTypographicColorV1Pack, eventionChicagoV1Pack, eventionWackerV1Pack, runtimeVerificationPack, ...generatedPacks].forEach((pack) => assetPackRegistry.register(pack));
+  worldRegistry.register(fantasyCity);
+  worldRegistry.register(coruscantCity);
+  worldRegistry.register(fifthElementCity);
+  worldRegistry.register(silhouetteFantasyCity);
+  worldRegistry.register(eventionTypographic);
+  worldRegistry.register(eventionTypographicColor);
+  worldRegistry.register(eventionChicago);
+  worldRegistry.register(eventionWacker);
+  worldRegistry.register(runtimeVerification);
+  generatedWorlds.forEach((world) => worldRegistry.register(world));
+}

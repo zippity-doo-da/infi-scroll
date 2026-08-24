@@ -1,0 +1,61 @@
+{
+  "id": "__WORLD_ID__",
+  "name": "__WORLD_NAME__",
+  "version": 1,
+  "designProfile": "silhouette-screensaver",
+  "layout": { "id": "urban-street", "tags": ["urban", "street"], "groundY": 848, "chunkHeight": 1080 },
+  "camera": { "autoScrollSpeed": 28, "inputSpeed": 340 },
+  "themes": ["night"],
+  "assetPacks": ["$PACK"],
+  "palette": { "sky": 855856, "city": 2758732, "ground": 1512492, "amber": 16754219 },
+  "backgrounds": [
+    { "id": "sky", "asset": "__WORLD_ID__-sky", "depth": -120, "parallax": 0.015, "y": 540, "spacing": 1920 },
+    { "id": "city", "asset": "__WORLD_ID__-city", "depth": -80, "parallax": 0.09, "y": 620, "spacing": 1920 },
+    { "id": "street", "asset": "__WORLD_ID__-street", "depth": 0, "parallax": 1, "y": 950, "spacing": 1920 }
+  ],
+  "entities": [
+    { "id": "building-01", "asset": "__WORLD_ID__-building-01", "depth": 8, "anchor": { "x": 0.5, "y": 1 }, "components": { "tags": ["grounded"] } },
+    { "id": "building-02", "asset": "__WORLD_ID__-building-02", "depth": 8, "anchor": { "x": 0.5, "y": 1 }, "components": { "tags": ["grounded"] } },
+    { "id": "building-03", "asset": "__WORLD_ID__-building-03", "depth": 8, "anchor": { "x": 0.5, "y": 1 }, "components": { "tags": ["grounded"] } },
+    { "id": "building-04", "asset": "__WORLD_ID__-building-04", "depth": 8, "anchor": { "x": 0.5, "y": 1 }, "components": { "tags": ["grounded"] } },
+    { "id": "building-05", "asset": "__WORLD_ID__-building-05", "depth": 8, "anchor": { "x": 0.5, "y": 1 }, "components": { "tags": ["grounded"] } },
+    { "id": "building-06", "asset": "__WORLD_ID__-building-06", "depth": 8, "anchor": { "x": 0.5, "y": 1 }, "components": { "tags": ["grounded"] } },
+    { "id": "building-07", "asset": "__WORLD_ID__-building-07", "depth": 8, "anchor": { "x": 0.5, "y": 1 }, "components": { "tags": ["grounded"] } },
+    { "id": "building-08", "asset": "__WORLD_ID__-building-08", "depth": 8, "anchor": { "x": 0.5, "y": 1 }, "components": { "tags": ["grounded"] } },
+    { "id": "person", "asset": "__WORLD_ID__-person", "depth": 14, "anchor": { "x": 0.5, "y": 1 }, "components": { "tags": ["grounded", "stationary"] } },
+    { "id": "vehicle-left", "asset": "__WORLD_ID__-vehicle", "animation": "vehicle-left", "depth": 40, "scale": 0.8, "anchor": { "x": 0.5, "y": 1 }, "components": { "pathFollower": { "path": "near-lane", "speed": { "min": 42, "max": 54 }, "direction": -1 }, "tags": ["grounded", "traffic"] } },
+    { "id": "vehicle-right", "asset": "__WORLD_ID__-vehicle", "animation": "vehicle-right", "depth": 30, "scale": 0.68, "anchor": { "x": 0.5, "y": 1 }, "components": { "pathFollower": { "path": "far-lane", "speed": { "min": 34, "max": 46 }, "direction": 1 }, "tags": ["grounded", "traffic"] } }
+  ],
+  "animations": [
+    { "id": "vehicle-left", "asset": "__WORLD_ID__-vehicle", "frames": [0, 1, 2, 3, 4, 5], "frameRate": 6, "repeat": -1 },
+    { "id": "vehicle-right", "asset": "__WORLD_ID__-vehicle", "frames": [5, 4, 3, 2, 1, 0], "frameRate": 6, "repeat": -1 }
+  ],
+  "chunks": [
+    { "id": "row-01", "width": 430, "objects": [{ "entity": "building-01", "x": 215, "y": 848 }] },
+    { "id": "row-02", "width": 430, "objects": [{ "entity": "building-02", "x": 215, "y": 848 }] },
+    { "id": "row-03", "width": 430, "objects": [{ "entity": "building-03", "x": 215, "y": 848 }] },
+    { "id": "row-04", "width": 430, "objects": [{ "entity": "building-04", "x": 215, "y": 848 }] },
+    { "id": "row-05", "width": 430, "objects": [{ "entity": "building-05", "x": 215, "y": 848 }] },
+    { "id": "row-06", "width": 430, "objects": [{ "entity": "building-06", "x": 215, "y": 848 }] },
+    { "id": "row-07", "width": 430, "objects": [{ "entity": "building-07", "x": 215, "y": 848 }] },
+    { "id": "row-08", "width": 430, "objects": [{ "entity": "building-08", "x": 215, "y": 848 }, { "entity": "person", "x": 390, "y": 848 }] }
+  ],
+  "chunkPlan": { "mode": "authored", "sequence": ["row-01", "row-02", "row-03", "row-04", "row-05", "row-06", "row-07", "row-08"], "repeat": true },
+  "paths": [
+    { "id": "far-lane", "y": 922, "xPadding": 160, "zone": "ground", "distance": "mid" },
+    { "id": "near-lane", "y": 1014, "xPadding": 180, "zone": "ground", "distance": "near" }
+  ],
+  "traffic": [
+    { "id": "far-traffic", "path": "far-lane", "entities": ["vehicle-right"], "intervalMs": { "min": 10500, "max": 15000 }, "maxActive": 1, "maxActivePerDirection": 1 },
+    { "id": "near-traffic", "path": "near-lane", "entities": ["vehicle-left"], "intervalMs": { "min": 9500, "max": 14000 }, "maxActive": 1, "maxActivePerDirection": 1 }
+  ],
+  "clock": { "startHour": 21, "realSecondsPerWorldHour": 60, "loopHours": 24 },
+  "environments": [{ "id": "night", "sky": [855856, 2497100], "ambientTint": 16777215 }],
+  "initialEnvironment": "night",
+  "weather": [{ "id": "clear" }],
+  "initialWeather": "clear",
+  "events": [],
+  "triggers": [],
+  "offscreen": { "sleepMargin": 240, "suspendAnimation": true, "suspendParticles": true, "keepLogicalTime": true },
+  "performanceBudget": { "targetFps": 60, "maxDrawCalls": 180, "maxTriangles": 8000, "maxTextureMemoryMb": 256, "maxActiveEntities": 120, "targetResolutions": [[1920, 1080], [2560, 1440], [3840, 2160]] }
+}

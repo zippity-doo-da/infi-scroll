@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080">
+  <rect width="1920" height="1080" fill="#020203"/>
+  <g font-family="Inter, Arial, Helvetica, sans-serif" fill="none" stroke="#fff">
+    <text x="105" y="92" font-size="28" font-weight="600" letter-spacing="8" opacity=".1">TRUST AFTER CHECKOUT</text>
+    <text x="105" y="190" font-size="42" font-weight="600" letter-spacing="8" opacity=".22">TOTAL RECON</text>
+    <text x="1190" y="190" font-size="40" font-weight="600" letter-spacing="8" opacity=".22">CASH RECON</text>
+    <text x="110" y="560" font-size="84" font-weight="750" letter-spacing="7" stroke-width="2.5" opacity=".56">TIPS+GRATUITIES</text>
+    <text x="820" y="865" font-size="88" font-weight="750" letter-spacing="7" stroke-width="2.5" opacity=".48">TOTAL RECON</text>
+  </g>
+  <image href="runtime/evention-word.svg" x="0" y="0" width="1920" height="1080"/>
+  <g font-family="DM Mono, Courier New, monospace" fill="#fff" opacity=".55" letter-spacing="5">
+    <text x="110" y="610" font-size="18">ACCURATE / AUTOMATED / AUDITABLE</text>
+    <text x="960" y="742" text-anchor="middle" font-size="17">FINANCIAL AUTOMATION / RECONCILIATION / TRUST</text>
+    <text x="110" y="1012" font-size="16">STYLE RULE: BLACK FIELD / WHITE OUTLINE / INTER DISPLAY / DM MONO UTILITY</text>
+  </g>
+  <path d="M0 170H1920M0 910H1920" stroke="#fff" stroke-opacity=".04"/>
+</svg>
