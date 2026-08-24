@@ -1,19 +1,36 @@
 # Infinite Illustrated World Engine
 
-A data-driven, horizontally scrolling 2D world engine. The repository ships one content template, `fantasy-city`, but the runtime contains no fantasy-specific systems.
+A data-driven Phaser engine for seamless, horizontally scrolling illustrated worlds. Rendering, recycling, traffic, environment, triggers, scheduling, seeded randomness, and performance management stay in the engine; each world's scenery and behavior live in content packs and configuration.
 
 ```bash
 npm install
 npm run dev
 ```
 
-Open `http://127.0.0.1:5173/?world=fantasy-city&seed=12345`.
+Open `http://127.0.0.1:5173/` to choose a world and seed. Direct links also work:
+
+`http://127.0.0.1:5173/?world=silhouette-fantasy-city&seed=12345`
 
 Append `&debug=1` to expose the developer-only chunk-boundary overlay.
 
-## Create and install an asset pack
+## Visual builder
 
-Open the visual builder at `http://127.0.0.1:5173/builder.html`, or use the command-line workflow below.
+Open `http://127.0.0.1:5173/builder.html` or choose **Open Builder** from the world selector.
+
+1. Load a reference world.
+2. Adjust its style, layers, world composition, and traffic while the real Phaser runtime previews the result.
+3. Validate scale, seams, repetition, traffic, and performance limits.
+4. Export the project.
+
+Export produces:
+
+- `builder-project.json`, which can be imported back into the builder;
+- `pack.json`, the reusable asset-pack definition;
+- `world.json`, the loadable world definition.
+
+The builder intentionally covers the common visual-authoring workflow. Advanced triggers, paths, sequences, environments, and rare events remain configuration-driven.
+
+## Create and install an asset pack from the command line
 
 ```bash
 npm run pack:new -- my-world
@@ -45,3 +62,13 @@ The complete format and design rules are in [docs/asset-pack-authoring.md](docs/
 No render-loop, camera, scheduler, trigger, or chunk-lifecycle changes should be required.
 
 Worlds may opt into continuous movement with `camera.autoScrollSpeed`; keyboard, wheel, and drag input remain generic engine behavior.
+
+## Included worlds
+
+- `silhouette-fantasy-city` — flagship authored fantasy world with environmental and rare-event integration.
+- `fantasy-city` — original fantasy-city pack.
+- `fifth-element-city` — vertical retro-futurist traffic world.
+- `coruscant-city` — layered aerial-metropolis world.
+- `evention-typographic` and `evention-typographic-color` — typographic parallax compositions.
+- `evention-chicago` — Chicago river composition.
+- `runtime-verification` — compact integration fixture and executable engine specification.

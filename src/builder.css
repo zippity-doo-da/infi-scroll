@@ -23,9 +23,12 @@ button { color: inherit; }
 .brand { display: flex; align-items: center; gap: 15px; color: #f5efe3; text-decoration: none; font: 600 25px/1 Georgia, serif; letter-spacing: -.02em; }
 .brand-mark { display: grid; place-items: center; width: 34px; height: 34px; color: var(--amber); border: 1px solid #594427; background: #24221d; }
 .top-actions { display: flex; align-items: center; gap: 10px; }
-.pack-title { display: flex; align-items: center; gap: 8px; color: var(--muted); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; }
+.pack-title, .preset-title { display: flex; align-items: center; gap: 8px; color: var(--muted); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; }
 .pack-title input { width: 150px; height: 34px; border: 1px solid var(--line); background: #111; color: #e9e4d9; padding: 0 10px; border-radius: 3px; text-transform: none; letter-spacing: 0; }
+.preset-title select { width: 176px; height: 34px; border: 1px solid var(--line); background: #111; color: #e9e4d9; padding: 0 9px; border-radius: 3px; text-transform: none; letter-spacing: 0; }
 .quiet-button, .secondary-button, .primary-button { min-height: 34px; border-radius: 3px; padding: 0 13px; border: 1px solid var(--line); background: #252522; cursor: pointer; }
+.import-button { display: inline-flex; align-items: center; }
+.import-button input { display: none; }
 .quiet-button:hover, .secondary-button:hover { border-color: #777268; }
 .primary-button, .export-button { background: var(--amber); color: #18140e; border: 1px solid #ffc15d; font-weight: 750; }
 .primary-button.compact { min-width: 92px; }

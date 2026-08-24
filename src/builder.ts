@@ -12,6 +12,7 @@ interface BuilderState {
   styleGuideFile?: string; previewPlaying: boolean; chunkMode: 'authored' | 'procedural' | 'hybrid';
   groundY: number; doorHeight: number; humanHeight: number; layers: LayerState[]; architecture: string[]; traffic: TrafficLane[];
 }
+interface BuilderProjectFile { kind: 'infi-scroll-builder-project'; version: 1; state: BuilderState }
 
 const ROOT = '/assets/silhouette-fantasy-city/v1';
 const architecture = [
@@ -19,7 +20,7 @@ const architecture = [
 ].map((id) => ({ id, name: id.split('-').map((part) => part[0]!.toUpperCase() + part.slice(1)).join(' '), src: `${ROOT}/runtime/${id}.png` }));
 
 const initialState: BuilderState = {
-  step: 'layers', selectedLayer: 'street', packId: 'my-world', worldName: 'My World', profile: 'silhouette-screensaver', flow: 'left', previewPlaying: true, chunkMode: 'authored', styleGuideFile: 'master-panorama-style-guide-v4.png',
+  step: 'layers', selectedLayer: 'street', packId: 'silhouette-fantasy-city', worldName: 'Silhouette Fantasy City', profile: 'silhouette-screensaver', flow: 'left', previewPlaying: true, chunkMode: 'authored', styleGuideFile: 'master-panorama-style-guide-v4.png',
   groundY: 78, doorHeight: 135, humanHeight: 100,
   layers: [
     { id: 'sky', name: 'Sky', role: 'sky', src: `${ROOT}/runtime/sky-seamless.png`, file: 'sky.png', direction: 'static', parallax: .015, height: 100, y: 50, opacity: 100, seamless: true, opaque: true },
@@ -69,6 +70,11 @@ const builderDefaultState = requestedPreset === 'evention-typographic-color'
   ? eventionColorState
   : requestedPreset === 'evention-typographic' ? eventionState : initialState;
 const storageKey = requestedPreset ? `infi-scroll-builder:${requestedPreset}` : 'infi-scroll-builder';
+const presetOptions = [
+  { id: 'silhouette-fantasy-city', name: 'Silhouette Fantasy City' },
+  { id: 'evention-typographic', name: 'Evention Typographic' },
+  { id: 'evention-typographic-color', name: 'Evention Typographic Color' },
+];
 
 function restore(): BuilderState {
   try {
@@ -227,9 +233,11 @@ function render(): void {
   app.innerHTML = `
     <div class="builder-shell">
       <header class="topbar">
-        <a class="brand" href="/" aria-label="Return to world"><span class="brand-mark">⌂</span><span>World Pack Builder</span></a>
+        <a class="brand" href="/" aria-label="Return to world selector"><span class="brand-mark">⌂</span><span>World Pack Builder</span></a>
         <div class="top-actions">
+          <label class="preset-title"><span>Load</span><select id="builder-preset" aria-label="Load reference world">${presetOptions.map((preset) => `<option value="${preset.id}" ${(requestedPreset ?? 'silhouette-fantasy-city') === preset.id ? 'selected' : ''}>${preset.name}</option>`).join('')}</select></label>
           <label class="pack-title"><span>Pack</span><input id="pack-id" value="${escape(state.packId)}" aria-label="Pack identifier"></label>
+          <label class="quiet-button import-button"><input id="import-project" type="file" accept="application/json,.json"><span>Import</span></label>
           <button class="quiet-button" id="preview-toggle">${state.previewPlaying ? 'Pause preview' : 'Play preview'}</button>
           <button class="quiet-button" id="reset-draft">Reset draft</button>
           <button class="primary-button compact" id="validate-top">Validate</button>
@@ -261,7 +269,7 @@ function render(): void {
       <section class="validation-rail">
         <button class="rail-heading" id="validate-bottom"><span>Validate</span><small>Run all design-profile checks</small></button>
         <div class="checks" id="checks">${validationMarkup()}</div>
-        <button class="export-button" id="export-pack"><svg viewBox="0 0 24 24"><path d="M12 16V3m0 0L7 8m5-5 5 5M5 14v6h14v-6"/></svg>Export pack</button>
+        <button class="export-button" id="export-pack"><svg viewBox="0 0 24 24"><path d="M12 16V3m0 0L7 8m5-5 5 5M5 14v6h14v-6"/></svg>Export project</button>
       </section>
       <div class="builder-toast" id="builder-toast" role="status"></div>
     </div>`;
@@ -367,6 +375,26 @@ function showToast(message: string, tone: 'ok' | 'warn' = 'ok'): void {
 }
 
 function bindEvents(): void {
+  document.querySelector<HTMLSelectElement>('#builder-preset')?.addEventListener('change', (event) => {
+    const preset = (event.target as HTMLSelectElement).value;
+    window.location.assign(`/builder.html?preset=${encodeURIComponent(preset)}`);
+  });
+  document.querySelector<HTMLInputElement>('#import-project')?.addEventListener('change', async (event) => {
+    const file = (event.target as HTMLInputElement).files?.[0];
+    if (!file) return;
+    try {
+      const project = JSON.parse(await file.text()) as Partial<BuilderProjectFile>;
+      if (project.kind !== 'infi-scroll-builder-project' || project.version !== 1 || !project.state) throw new Error('Not an Infi Scroll builder project');
+      if (!Array.isArray(project.state.layers) || !Array.isArray(project.state.traffic) || !project.state.layers.length) throw new Error('Builder project is incomplete');
+      state = { ...structuredClone(builderDefaultState), ...project.state };
+      if (!state.layers.some((layer) => layer.id === state.selectedLayer)) state.selectedLayer = state.layers[0]!.id;
+      localStorage.setItem(storageKey, JSON.stringify(state));
+      render();
+      window.setTimeout(() => showToast(`Imported ${file.name}.`), 0);
+    } catch (error) {
+      showToast(error instanceof Error ? error.message : 'Could not import project.', 'warn');
+    }
+  });
   document.querySelectorAll<HTMLElement>('[data-step]').forEach((button) => button.addEventListener('click', () => { state.step = button.dataset.step as Step; save(); render(); }));
   document.querySelectorAll<HTMLElement>('[data-layer-id], [data-select-layer]').forEach((layer) => layer.addEventListener('click', () => { state.selectedLayer = layer.dataset.layerId ?? layer.dataset.selectLayer!; state.step = 'layers'; save(); render(); }));
   document.querySelector<HTMLInputElement>('#pack-id')?.addEventListener('change', (event) => { state.packId = (event.target as HTMLInputElement).value.trim().toLowerCase().replace(/[^a-z0-9]+/g, '-'); save(); render(); });
@@ -398,7 +426,7 @@ function bindEvents(): void {
   bindUpload('#architecture-file', (file, url) => { const id = file.name.replace(/\.[^.]+$/, '').toLowerCase().replace(/[^a-z0-9]+/g, '-'); if (!architecture.some((asset) => asset.id === id)) architecture.push({ id, name: id.split('-').map((part) => part[0]!.toUpperCase() + part.slice(1)).join(' '), src: url }); if (!state.architecture.includes(id)) state.architecture.push(id); });
   document.querySelector('#add-layer')?.addEventListener('click', () => {
     const input = document.createElement('input'); input.type = 'file'; input.accept = 'image/png';
-    input.addEventListener('change', () => { const file = input.files?.[0]; if (!file) return; const id = `backdrop-${state.layers.length + 1}`; state.layers.push({ id, name: `Backdrop ${state.layers.length + 1}`, role: 'mid-background', src: URL.createObjectURL(file), file: file.name, direction: 'left', parallax: .15, height: 55, y: 50, opacity: 100, seamless: true, opaque: false }); state.selectedLayer = id; save(); render(); });
+    input.addEventListener('change', async () => { const file = input.files?.[0]; if (!file) return; const id = `backdrop-${state.layers.length + 1}`; state.layers.push({ id, name: `Backdrop ${state.layers.length + 1}`, role: 'mid-background', src: await fileToDataUrl(file), file: file.name, direction: 'left', parallax: .15, height: 55, y: 50, opacity: 100, seamless: true, opaque: false }); state.selectedLayer = id; save(); render(); });
     input.click();
   });
   document.querySelectorAll<HTMLElement>('[data-add-route]').forEach((button) => button.addEventListener('click', () => { const zone = button.dataset.addRoute as TrafficLane['zone']; const limit = zone === 'sky' ? 3 : 2; const count = state.traffic.filter((lane) => lane.zone === zone).length; if (count >= limit) { showToast(`This profile allows ${limit} ${zone === 'sky' ? 'sky routes' : 'road lanes'}.`, 'warn'); return; } const id = `${zone}-route-${state.traffic.length + 1}`; const sky = zone === 'sky'; state.traffic.push({ id, name: sky ? `Sky route ${count + 1}` : `Road lane ${count + 1}`, vehicle: sky ? 'Bat' : 'Wagon', src: vehicleSource(sky ? 'Bat' : 'Wagon'), direction: state.traffic.length % 2 ? 'left' : 'right', speed: sky ? 62 : 44, maxActive: 1, y: sky ? 24 + count * 14 : 86 + count * 7, zone, distance: sky ? 'far' : count ? 'near' : 'mid' }); save(); render(); }));
@@ -420,8 +448,17 @@ function moveSelectedLayer(direction: -1 | 1): void {
   save(); render();
 }
 
+function fileToDataUrl(file: File): Promise<string> {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.addEventListener('load', () => resolve(String(reader.result)));
+    reader.addEventListener('error', () => reject(reader.error));
+    reader.readAsDataURL(file);
+  });
+}
+
 function bindUpload(selector: string, apply: (file: File, url: string) => void): void {
-  document.querySelector<HTMLInputElement>(selector)?.addEventListener('change', (event) => { const file = (event.target as HTMLInputElement).files?.[0]; if (!file) return; apply(file, URL.createObjectURL(file)); save(); render(); });
+  document.querySelector<HTMLInputElement>(selector)?.addEventListener('change', async (event) => { const file = (event.target as HTMLInputElement).files?.[0]; if (!file) return; apply(file, await fileToDataUrl(file)); save(); render(); });
 }
 
 function download(name: string, data: unknown): void {
@@ -475,8 +512,11 @@ function exportPack(): void {
     offscreen: { sleepMargin: 240, suspendAnimation: true, suspendParticles: true, keepLogicalTime: true },
     performanceBudget: { targetFps: 60, maxDrawCalls: 180, maxTriangles: 8000, maxTextureMemoryMb: 256, maxActiveEntities: 120, targetResolutions: [[1920, 1080]] },
   };
-  download('pack.json', pack); setTimeout(() => download('world.json', world), 180);
-  showToast('Exported pack.json and world.json.');
+  const project: BuilderProjectFile = { kind: 'infi-scroll-builder-project', version: 1, state: structuredClone(state) };
+  download('builder-project.json', project);
+  setTimeout(() => download('pack.json', pack), 180);
+  setTimeout(() => download('world.json', world), 360);
+  showToast('Exported builder project, pack, and world configuration.');
 }
 
 render();
