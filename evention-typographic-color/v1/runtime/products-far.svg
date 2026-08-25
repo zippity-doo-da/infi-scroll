@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080">
+  <style>
+    text { font-family: Inter, Arial, Helvetica, sans-serif; font-weight: 600; letter-spacing: 8px; fill: none; stroke: #54E577; stroke-width: 1.4px; opacity: .24; }
+    .mono { font-family: "DM Mono", "Courier New", monospace; font-size: 18px; letter-spacing: 4px; stroke: none; fill: #54E577; opacity: .25; }
+  </style>
+  <text x="110" y="280" font-size="48">TOTAL RECON</text>
+  <text x="1040" y="280" font-size="44">CASH RECON</text>
+  <text x="330" y="700" font-size="42">CREDIT CARD ANALYTICS</text>
+  <text x="1180" y="1000" font-size="48">OTA RECON</text>
+  <text x="120" y="1000" font-size="40">CREDIT CARD RECON</text>
+  <text class="mono" x="110" y="330">AUTOMATED FINANCIAL OPERATIONS</text>
+  <text class="mono" x="1180" y="1050">TRUST AFTER CHECKOUT</text>
+</svg>
