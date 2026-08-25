@@ -9,7 +9,7 @@ export interface LoadedWorld { template: WorldTemplate; designProfile: DesignPro
 
 export function loadWorld(search = window.location.search): LoadedWorld {
   const params = new URLSearchParams(search);
-  const requested = params.get('world') ?? 'fantasy-city';
+  const requested = params.get('world') ?? 'evention-typographic';
   const seed = params.get('seed') ?? String(Date.now());
   if (requested === BUILDER_PREVIEW_WORLD_ID) {
     const preview = readBuilderPreview();

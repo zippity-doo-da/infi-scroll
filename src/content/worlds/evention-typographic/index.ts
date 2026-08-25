@@ -49,7 +49,7 @@ export const eventionTypographic: WorldTemplate = {
   performanceBudget: { targetFps: 60, maxDrawCalls: 20, maxTriangles: 1000, maxTextureMemoryMb: 64, maxActiveEntities: 8, targetResolutions: [[1920, 1080], [2560, 1440], [3840, 2160]] },
   metadata: {
     description: 'A monochrome Evention typographic scroll using a transparent, properly kerned word asset and six independently moving message, product, system, and outcome bands.',
-    styleGuide: '/assets/evention-typographic/v1/master-panorama-style-guide.svg',
+    styleGuide: `${import.meta.env.BASE_URL}assets/evention-typographic/v1/master-panorama-style-guide.svg`,
     brandReference: 'https://eventionllc.com/',
   },
 };
