@@ -6,16 +6,16 @@ const GROUND_Y = HEIGHT - 232;
 const STREET_CENTER_Y = HEIGHT - 130;
 
 const rows: Array<[string, number, string, Array<[string, number]>]> = [
-  ['fortified-gate', 540, 'sfc-fortified-gate', [['sfc-person-guard', 438]]],
-  ['guildhall', 378, 'sfc-guildhall', [['sfc-person-scholar', 345]]],
-  ['dancer-inn', 226, 'sfc-dancer-inn', [['sfc-street-lamp', 212]]],
-  ['apothecary', 214, 'sfc-apothecary', [['sfc-person-traveler', 196]]],
-  ['bakery', 305, 'sfc-bakery', [['sfc-market-stall', 282]]],
-  ['workshop', 365, 'sfc-workshop', [['sfc-person-merchant', 340]]],
-  ['townhouse', 149, 'sfc-townhouse', [['sfc-tree', 136]]],
-  ['celestial-temple', 399, 'sfc-celestial-temple', [['sfc-fountain', 370]]],
-  ['merchant-house', 250, 'sfc-merchant-house', [['sfc-street-lamp', 236]]],
-  ['civic-archive', 522, 'sfc-civic-archive', [['sfc-tree', 506]]],
+  ['fortified-gate', 540, 'sfc-fortified-gate', [['sfc-street-lamp', 72], ['sfc-person-guard', 438]]],
+  ['guildhall', 378, 'sfc-guildhall', [['sfc-tree', 42], ['sfc-person-scholar', 345]]],
+  ['dancer-inn', 226, 'sfc-dancer-inn', [['sfc-street-lamp', 18]]],
+  ['apothecary', 244, 'sfc-apothecary', [['sfc-person-traveler', 222]]],
+  ['bakery', 335, 'sfc-bakery', [['sfc-market-stall', 42], ['sfc-street-lamp', 314]]],
+  ['workshop', 395, 'sfc-workshop', [['sfc-person-merchant', 34], ['sfc-tree', 374]]],
+  ['townhouse', 179, 'sfc-townhouse', [['sfc-tree', 160]]],
+  ['celestial-temple', 429, 'sfc-celestial-temple', [['sfc-street-lamp', 30], ['sfc-fountain', 398]]],
+  ['merchant-house', 280, 'sfc-merchant-house', [['sfc-street-lamp', 258]]],
+  ['civic-archive', 552, 'sfc-civic-archive', [['sfc-tree', 38], ['sfc-fountain', 520]]],
 ];
 
 const chunks: ChunkTemplate[] = rows.map(([id, width, building, extras]) => ({

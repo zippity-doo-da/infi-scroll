@@ -22,11 +22,11 @@ Open `http://127.0.0.1:5173/builder.html` or choose **Open Builder** from the wo
 3. Validate scale, seams, repetition, traffic, and performance limits.
 4. Export the project.
 
-Export produces:
+The bottom action rail provides three outputs:
 
-- `builder-project.json`, which can be imported back into the builder;
-- `pack.json`, the reusable asset-pack definition;
-- `world.json`, the loadable world definition.
+- **Project files** downloads `builder-project.json`, `pack.json`, and `world.json`. Uploaded layer, style-guide, and architecture images are embedded in the builder project and survive import/export.
+- **Scroller ZIP** produces a no-build static site containing `index.html`, `styles.css`, `scroller.js`, configuration, and copied assets. It can be opened locally or published on any static host without Phaser or this repository.
+- **Install world** is available while running the Vite development server. It writes the authored pack under `authoring/packs`, prepares its assets, registers it with the engine, and opens the installed world.
 
 The builder intentionally covers the common visual-authoring workflow. Advanced triggers, paths, sequences, environments, and rare events remain configuration-driven.
 

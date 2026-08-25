@@ -2,6 +2,12 @@
 
 New worlds are content. They do not require edits to the renderer, camera, chunk recycler, scheduler, trigger engine, traffic system, or animation runtime.
 
+## Builder workflow
+
+The visual builder can round-trip portable `builder-project.json` files, including uploaded layer, architecture, and style-guide artwork. Its **Scroller ZIP** output is an independent HTML/CSS/JavaScript scroller for people who do not need the full engine. **Install world** converts the current builder project into the normal source-pack layout documented below and registers it locally.
+
+The install endpoint exists only in the local Vite development server; production builds do not expose filesystem installation.
+
 ## Fast path
 
 ```bash

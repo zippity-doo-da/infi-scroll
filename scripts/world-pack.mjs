@@ -19,6 +19,19 @@ function pngSize(file) {
   return [header.readUInt32BE(16), header.readUInt32BE(20)];
 }
 
+function imageSize(file) {
+  if (path.extname(file).toLowerCase() === '.png') return pngSize(file);
+  if (path.extname(file).toLowerCase() === '.svg') {
+    const source = fs.readFileSync(file, 'utf8');
+    const viewBox = /viewBox=["']\s*[-\d.]+\s+[-\d.]+\s+([\d.]+)\s+([\d.]+)\s*["']/i.exec(source);
+    if (viewBox) return [Math.round(Number(viewBox[1])), Math.round(Number(viewBox[2]))];
+    const width = /\bwidth=["']([\d.]+)/i.exec(source)?.[1];
+    const height = /\bheight=["']([\d.]+)/i.exec(source)?.[1];
+    return [Math.round(Number(width) || 1920), Math.round(Number(height) || 1080)];
+  }
+  return [0, 0];
+}
+
 function load(directory) {
   const absolute = path.resolve(directory);
   return {
@@ -56,7 +69,7 @@ function validate(input, preparedRoot) {
       const output = path.join(preparedRoot, asset.output ?? asset.file);
       if (!fs.existsSync(output)) error(`prepared asset missing: ${output}`);
       else {
-        const [width, height] = pngSize(output);
+        const [width, height] = imageSize(output);
         if (width > 4096 || height > 4096) warn(`asset '${asset.id}' is ${width}x${height}; consider a smaller runtime texture`);
       }
     }
@@ -64,7 +77,7 @@ function validate(input, preparedRoot) {
 
   const recipes = pack.recipes ?? [];
   const architectureAssets = new Set(recipes.filter((recipe) => recipe.tags?.includes('architecture')).map((recipe) => recipe.asset));
-  if (architectureAssets.size < 8) error(`only ${architectureAssets.size} architecture variants; minimum is 8`);
+  if (world.designProfile !== 'typographic-screensaver' && architectureAssets.size < 8) error(`only ${architectureAssets.size} architecture variants; minimum is 8`);
   for (const recipe of recipes) {
     if (!assetIds.has(recipe.asset)) error(`recipe '${recipe.id}' references unknown asset '${recipe.asset}'`);
     if (recipe.tags?.includes('grounded') && (recipe.anchor?.x !== 0.5 || recipe.anchor?.y !== 1)) error(`grounded recipe '${recipe.id}' must use bottom-center anchor`);
@@ -127,6 +140,7 @@ function printReport(report) {
 
 function prepareAsset(input, asset, output) {
   const source = path.resolve(input.directory, input.pack.sourceRoot ?? 'assets', asset.file);
+  if (path.extname(source).toLowerCase() === '.svg') { fs.copyFileSync(source, output); return; }
   const options = asset.prepare ?? {};
   const args = [path.join(repository, 'scripts/prepare-pack-asset.py'), source, output];
   if (options.trim) args.push('--trim');
@@ -158,7 +172,9 @@ function install(input) {
   const runtimeRoot = path.join(publicRoot, 'runtime');
   fs.mkdirSync(runtimeRoot, { recursive: true });
   const guideSource = path.resolve(input.directory, input.pack.style.guide);
-  fs.copyFileSync(guideSource, path.join(publicRoot, 'style-guide.png'));
+  const guideExtension = path.extname(guideSource) || '.png';
+  const guideOutput = `style-guide${guideExtension}`;
+  fs.copyFileSync(guideSource, path.join(publicRoot, guideOutput));
   for (const asset of input.pack.assets) prepareAsset(input, asset, path.join(runtimeRoot, asset.output ?? asset.file));
   const post = validate(input, runtimeRoot);
   if (!printReport(post)) return false;
@@ -166,11 +182,11 @@ function install(input) {
   const pack = {
     id: input.pack.id, version: input.pack.version, requires: input.pack.requires,
     compatibility: input.pack.compatibility,
-    style: { ...input.pack.style, guide: `/${publicRelative}/style-guide.png` },
+    style: { ...input.pack.style, guide: `/${publicRelative}/${guideOutput}` },
     assets: input.pack.assets.map((asset) => {
       const output = asset.output ?? asset.file;
       const prepared = path.join(runtimeRoot, output);
-      const [width, height] = pngSize(prepared);
+      const [width, height] = imageSize(prepared);
       return {
         id: asset.id, source: `/${publicRelative}/runtime/${output}`,
         ...(asset.prepare?.frames > 1 ? { frameWidth: asset.prepare.cellWidth, frameHeight: asset.prepare.cellHeight } : {}),
