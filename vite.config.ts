@@ -55,6 +55,7 @@ function localWorldInstaller() {
 }
 
 export default defineConfig({
+  base: '/infi-scroll/',
   plugins: [localWorldInstaller()],
   server: { host: '127.0.0.1', port: 5173 },
   build: { target: 'es2022', rollupOptions: { input: { world: resolve(__dirname, 'index.html'), builder: resolve(__dirname, 'builder.html') } } },
