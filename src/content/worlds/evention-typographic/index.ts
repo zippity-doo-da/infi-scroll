@@ -2,7 +2,7 @@ import type { WorldTemplate } from '../../../engine/contracts/world';
 
 const WIDTH = 1920;
 const HEIGHT = 1080;
-const VIEW_SCALE = Math.min(1, window.innerWidth / WIDTH);
+const VIEW_SCALE = Math.max(window.innerWidth / WIDTH, window.innerHeight / HEIGHT);
 const VIEW_SPAN = WIDTH * VIEW_SCALE;
 const VIEW_Y = window.innerHeight / 2;
 const backgroundScale = { min: VIEW_SCALE, max: VIEW_SCALE };
@@ -13,7 +13,7 @@ export const eventionTypographic: WorldTemplate = {
   name: 'Evention Typographic',
   version: 1,
   designProfile: 'typographic-screensaver',
-  layout: { id: 'typographic-field', tags: ['typographic', 'brand', 'abstract'], groundY: HEIGHT, chunkHeight: HEIGHT },
+  layout: { id: 'typographic-field', tags: ['typographic', 'brand', 'abstract'], groundY: HEIGHT, chunkHeight: HEIGHT, viewportFit: 'cover' },
   camera: { autoScrollSpeed: 32, inputSpeed: 340 },
   themes: ['evention', 'monochrome', 'typographic'],
   assetPacks: ['evention-typographic-v1'],

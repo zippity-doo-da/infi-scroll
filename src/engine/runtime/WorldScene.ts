@@ -120,6 +120,7 @@ export class WorldScene extends Phaser.Scene {
     this.createSky();
     this.createBackgrounds();
     this.setEnvironment(this.template.initialEnvironment);
+    this.scale.on(Phaser.Scale.Events.RESIZE, this.handleResize, this);
     this.setWeather(this.template.initialWeather);
     this.installInput();
     this.actions.subscribe((action) => this.execute(action));
@@ -129,7 +130,10 @@ export class WorldScene extends Phaser.Scene {
     }
     this.ensureChunks();
     this.updateChunkSleep();
-    this.events.once(Phaser.Scenes.Events.SHUTDOWN, () => this.disposeRuntimeViews());
+    this.events.once(Phaser.Scenes.Events.SHUTDOWN, () => {
+      this.scale.off(Phaser.Scale.Events.RESIZE, this.handleResize, this);
+      this.disposeRuntimeViews();
+    });
   }
 
   update(_time: number, delta: number): void {
@@ -226,6 +230,34 @@ export class WorldScene extends Phaser.Scene {
         return image;
       });
       this.backgroundObjects.push({ layer, images });
+    }
+    this.resizeBackgrounds();
+  }
+
+  private handleResize(): void {
+    this.overlay?.setSize(this.scale.width, this.scale.height);
+    this.effectFlash?.setSize(this.scale.width, this.scale.height);
+    if (this.activeEnvironment) {
+      const environment = this.template.environments.find((candidate) => candidate.id === this.activeEnvironment);
+      if (environment) this.paintSky(environment);
+    }
+    this.resizeBackgrounds();
+  }
+
+  private resizeBackgrounds(): void {
+    if (this.template.layout.viewportFit !== 'cover') return;
+    for (const group of this.backgroundObjects) {
+      const source = this.textures.get(group.layer.asset).getSourceImage() as { width?: number; height?: number };
+      const sourceWidth = source.width ?? 1920;
+      const sourceHeight = source.height ?? 1080;
+      const scale = Math.max(this.scale.width / sourceWidth, this.scale.height / sourceHeight);
+      const spacing = sourceWidth * scale;
+      const y = this.scale.height / 2;
+      group.layer.spacing = spacing;
+      group.layer.offsetX = spacing / 2;
+      group.layer.y = y;
+      group.layer.scale = { min: scale, max: scale };
+      group.images.forEach((image, index) => image.setPosition(index * spacing + spacing / 2, y).setScale(scale));
     }
   }
 

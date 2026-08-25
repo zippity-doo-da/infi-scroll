@@ -228,7 +228,7 @@ export interface WorldTemplate {
   name: string;
   version: number;
   designProfile: Id;
-  layout: { id: Id; tags: string[]; groundY: number; chunkHeight: number };
+  layout: { id: Id; tags: string[]; groundY: number; chunkHeight: number; viewportFit?: 'cover' };
   camera?: { autoScrollSpeed?: number; inputSpeed?: number };
   themes: Id[];
   assetPacks: Id[];
