@@ -250,7 +250,13 @@ export class WorldScene extends Phaser.Scene {
       const source = this.textures.get(group.layer.asset).getSourceImage() as { width?: number; height?: number };
       const sourceWidth = source.width ?? 1920;
       const sourceHeight = source.height ?? 1080;
-      const scale = Math.max(this.scale.width / sourceWidth, this.scale.height / sourceHeight);
+      // The panoramic field should cover the viewport, but the hero wordmark
+      // must remain fully visible when the browser viewport is shorter than
+      // the 16:9 reference canvas (for example with browser chrome visible).
+      const isHeroTypography = group.layer.id === 'evention-hero-word';
+      const scale = isHeroTypography
+        ? Math.min(this.scale.width / sourceWidth, this.scale.height / sourceHeight)
+        : Math.max(this.scale.width / sourceWidth, this.scale.height / sourceHeight);
       const spacing = sourceWidth * scale;
       const y = this.scale.height / 2;
       group.layer.spacing = spacing;
