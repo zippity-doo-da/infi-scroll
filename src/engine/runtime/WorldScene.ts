@@ -107,8 +107,9 @@ export class WorldScene extends Phaser.Scene {
   preload(): void {
     for (const asset of this.loaded.assets.all()) {
       if (!asset.source) continue;
-      if (asset.frameWidth && asset.frameHeight) this.load.spritesheet(asset.id, asset.source, { frameWidth: asset.frameWidth, frameHeight: asset.frameHeight });
-      else this.load.image(asset.id, asset.source);
+      const source = asset.source.startsWith('/assets/') ? `${import.meta.env.BASE_URL}${asset.source.slice(1)}` : asset.source;
+      if (asset.frameWidth && asset.frameHeight) this.load.spritesheet(asset.id, source, { frameWidth: asset.frameWidth, frameHeight: asset.frameHeight });
+      else this.load.image(asset.id, source);
     }
   }
 
