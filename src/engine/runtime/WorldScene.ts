@@ -126,7 +126,7 @@ export class WorldScene extends Phaser.Scene {
     this.actions.subscribe((action) => this.execute(action));
     for (const traffic of this.template.traffic) {
       if (!traffic.initialDelayMs) continue;
-      this.trafficDue.set(traffic.id, this.time.now + this.random.between(traffic.initialDelayMs.min, traffic.initialDelayMs.max));
+      this.trafficDue.set(traffic.id, this.elapsedMs + this.random.between(traffic.initialDelayMs.min, traffic.initialDelayMs.max));
     }
     this.ensureChunks();
     this.updateChunkSleep();
@@ -381,7 +381,7 @@ export class WorldScene extends Phaser.Scene {
   }
 
   private updateTraffic(delta: number): void {
-    const now = this.time.now;
+    const now = this.elapsedMs;
     for (const traffic of this.template.traffic) {
       const active = this.movers.filter((mover) => mover.trafficId === traffic.id).length;
       if (now < (this.trafficDue.get(traffic.id) ?? 0) || active >= traffic.maxActive) continue;
@@ -417,7 +417,8 @@ export class WorldScene extends Phaser.Scene {
   }
 
   private updateMovers(delta: number): void {
-    const minX = this.cameras.main.scrollX - 200; const maxX = this.cameras.main.scrollX + this.scale.width + 200;
+    const moverMargin = Math.max(200, ...this.template.paths.map((path) => (path.xPadding ?? 0) + 40));
+    const minX = this.cameras.main.scrollX - moverMargin; const maxX = this.cameras.main.scrollX + this.scale.width + moverMargin;
     this.movers = this.movers.filter((mover) => {
       mover.object.x += mover.velocityX * delta / 1000;
       mover.object.y += (mover.velocityY ?? 0) * delta / 1000;

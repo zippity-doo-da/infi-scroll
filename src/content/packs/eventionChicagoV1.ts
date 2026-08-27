@@ -1,6 +1,6 @@
 import type { AssetPack } from '../../engine/contracts/world';
 
-const ROOT = '/assets/evention-chicago/v1';
+const ROOT = `${import.meta.env.BASE_URL}assets/evention-chicago/v1`;
 
 export const eventionChicagoV1Pack: AssetPack = {
   id: 'evention-chicago-v1',

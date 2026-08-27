@@ -28,7 +28,7 @@ export const eventionChicago: WorldTemplate = {
   ],
   entities: [
     { id: 'echi-water-taxi-entity', asset: 'echi-water-taxi', depth: -6, scale: 0.18 * SCALE, anchor: { x: 0.5, y: 1 }, components: { pathFollower: { path: 'echi-river-route', speed: { min: 54, max: 66 }, direction: 1 }, tags: ['traffic', 'waterborne'] } },
-    { id: 'echi-cta-entity', asset: 'echi-cta-pair', depth: -55, scale: 0.2 * SCALE, anchor: { x: 0.5, y: 1 }, components: { pathFollower: { path: 'echi-train-route', speed: { min: 74, max: 88 }, direction: -1 }, tags: ['traffic', 'rail', 'elevated'] } },
+    { id: 'echi-cta-entity', asset: 'echi-cta-pair', depth: -5, scale: 0.2 * SCALE, anchor: { x: 0.5, y: 1 }, components: { pathFollower: { path: 'echi-train-route', speed: { min: 74, max: 88 }, direction: -1 }, tags: ['traffic', 'rail', 'elevated'] } },
   ],
   animations: [],
   chunks: [{ id: 'echi-loop-cycle', width: SPAN, tags: ['downtown', 'river-canyon'], objects: [] }],
@@ -57,7 +57,7 @@ export const eventionChicago: WorldTemplate = {
   performanceBudget: { targetFps: 60, maxDrawCalls: 100, maxTriangles: 4000, maxTextureMemoryMb: 220, maxActiveEntities: 24, targetResolutions: [[1920, 1080], [2560, 1440], [3840, 2160]] },
   metadata: {
     description: 'A fictional Evention customer city set in an unmistakable orthographic downtown Chicago river canyon.',
-    styleGuide: '/assets/evention-chicago/v1/master-panorama-style-guide.png',
+    styleGuide: `${import.meta.env.BASE_URL}assets/evention-chicago/v1/master-panorama-style-guide.png`,
     location: 'Fictional downtown Chicago riverfront',
   },
 };

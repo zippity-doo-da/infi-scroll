@@ -12,7 +12,7 @@ A fictional, downtown-Chicago side-scrolling world. It does not represent Eventi
 - Evention uses the supplied official logo artwork, never an improvised wordmark.
 - No baked people, trains, boats or road traffic.
 - One water taxi and one CTA train maximum on screen in their respective routes.
-- The current CTA pair is structurally closer to the 5000-series but remains scheduled for another visual-accuracy pass.
+- The CTA pair uses a two-car 5000-series-style train with the route running above the riverfront.
 
 ## Included customer signage
 
