@@ -35,7 +35,7 @@
   ],
   "animations": [],
   "chunks": [
-    { "id": "adc-palace-row", "width": 620, "objects": [{ "entity": "adc-movie-palace", "x": 310, "y": 610 }, { "entity": "adc-street-lamp", "x": 598, "y": 610 }] },
+    { "id": "adc-palace-row", "width": 420, "objects": [{ "entity": "adc-movie-palace", "x": 182.5, "y": 610 }, { "entity": "adc-street-lamp", "x": 398, "y": 610 }] },
     { "id": "adc-store-row", "width": 480, "objects": [{ "entity": "adc-department-store", "x": 240, "y": 610 }, { "entity": "adc-woman", "x": 452, "y": 610 }] },
     { "id": "adc-bank-row", "width": 570, "objects": [{ "entity": "adc-bank", "x": 285, "y": 610 }, { "entity": "adc-street-lamp", "x": 548, "y": 610 }] },
     { "id": "adc-jazz-row", "width": 440, "objects": [{ "entity": "adc-jazz-club", "x": 220, "y": 610 }, { "entity": "adc-man", "x": 410, "y": 610 }] },

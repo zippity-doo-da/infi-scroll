@@ -805,16 +805,16 @@ export const generatedWorld: WorldTemplate = {
   "chunks": [
     {
       "id": "adc-palace-row",
-      "width": 620,
+      "width": 420,
       "objects": [
         {
           "entity": "adc-movie-palace",
-          "x": 310,
+          "x": 182.5,
           "y": 610
         },
         {
           "entity": "adc-street-lamp",
-          "x": 598,
+          "x": 398,
           "y": 610
         }
       ]
