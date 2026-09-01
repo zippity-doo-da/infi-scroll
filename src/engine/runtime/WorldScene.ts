@@ -226,7 +226,7 @@ export class WorldScene extends Phaser.Scene {
       const images = Array.from({ length: Math.ceil(this.scale.width / layer.spacing) + 3 }, (_, index) => {
         const image = this.add.image(index * layer.spacing + (layer.offsetX ?? 0), layer.y, layer.asset).setDepth(layer.depth).setScrollFactor(0);
         const scale = this.random.between(layer.scale?.min ?? 1, layer.scale?.max ?? 1);
-        image.setScale(scale).setAlpha(layer.opacity ?? 1);
+        image.setScale(scale).setAlpha(layer.opacity ?? 1).setTint(layer.tint ?? 0xffffff);
         if (layer.height !== undefined) image.setDisplaySize(layer.spacing, layer.height);
         return image;
       });
@@ -667,7 +667,7 @@ export class WorldScene extends Phaser.Scene {
     for (const group of this.backgroundObjects) {
       const asset = environment.assetVariants?.[group.layer.asset] ?? group.layer.asset;
       if (asset !== group.layer.asset) this.environmentVariantApplications += group.images.length;
-      group.images.forEach((image) => image.setTexture(asset).setTint(tint));
+      group.images.forEach((image) => image.setTexture(asset).setTint(group.layer.tint ?? tint));
     }
     for (const view of this.entityViews) {
       const entityId = this.viewEntities.get(view);

@@ -9,6 +9,7 @@ interface WorldChoice {
 }
 
 const worlds: WorldChoice[] = [
+  { id: 'art-deco-silhouette', name: 'Art Deco Silhouette', description: 'A dark 1920s skyline with restrained traffic and rare rooftop figures.', preview: '/assets/art-deco-city-pack/v1/style-guide.png' },
   { id: 'silhouette-fantasy-city', name: 'Silhouette Fantasy City', description: 'A moonlit illustrated city with authored streets, passing storms, and rare ambient events.', preview: '/assets/silhouette-fantasy-city/v1/master-panorama-style-guide-v4.png' },
   { id: 'fantasy-city', name: 'Fantasy City', description: 'The original unified fantasy-city asset package and authored district sequence.', preview: '/assets/fantasy-city/unified-v1/approval-preview.jpg' },
   { id: 'fifth-element-city', name: 'Fifth Element City', description: 'Retro-futurist traffic descending through a deep vertical city canyon.', preview: '/assets/vertical-element/v1/master-panorama-style-guide-v2-no-vehicles.png' },

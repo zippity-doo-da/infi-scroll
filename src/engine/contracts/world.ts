@@ -198,6 +198,7 @@ export interface BackgroundLayer {
   scale?: Range;
   height?: number;
   opacity?: number;
+  tint?: number;
 }
 
 export interface CompositionRulesDefinition {

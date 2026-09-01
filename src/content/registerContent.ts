@@ -23,6 +23,7 @@ import { eventionTypographicColor } from './worlds/evention-typographic-color';
 import { eventionChicago } from './worlds/evention-chicago';
 import { eventionWacker } from './worlds/evention-wacker';
 import { runtimeVerification } from './worlds/runtime-verification';
+import { artDecoSilhouette } from './worlds/art-deco-silhouette';
 import { generatedPacks, generatedWorlds } from './generated';
 
 export function registerContent(): void {
@@ -37,5 +38,6 @@ export function registerContent(): void {
   worldRegistry.register(eventionChicago);
   worldRegistry.register(eventionWacker);
   worldRegistry.register(runtimeVerification);
+  worldRegistry.register(artDecoSilhouette);
   generatedWorlds.forEach((world) => worldRegistry.register(world));
 }
